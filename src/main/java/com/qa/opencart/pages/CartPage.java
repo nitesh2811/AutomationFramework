@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 public class CartPage {
 
+	@SuppressWarnings("unused")
 	private By cartPage = By.id("title");
 
 	public static void main(String[] args) {
