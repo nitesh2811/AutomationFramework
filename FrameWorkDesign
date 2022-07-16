@@ -1,0 +1,64 @@
+FrameWork Design
+
+Hybrid Framework 
+
+1.Combination of multiple things- Libs/Utils/TestNG/Log4J 
+2.Design Pattern- What kind of framework and the purpose of the framework(UI Application/WebApplication/API application.)
+3.POM is a design pattern which provides certain rules and regulations
+4.Single Responsibilty principle(SRP).
+  Every class every component have single responsibility and its having its own purpose. 
+5.According to the POM(Design Pattern)-Every page should have a page layer irrespective of the number of pages.
+  POM is only applicable for the WebPages or the Mobile Pages.
+  It is not applicable for the API automation.
+6.Every page class has to follow the Encapsulation-(Every page will have By locators)
+7.There will be public page actions and private By locators-(Locators will be private)
+8.Every page class must have test class. 
+  Every test class will have assertions 
+9.Test class will extends Base Test.
+  Remember page class will not have any Test code otherwise it will violation of the POM.
+10.Test code is responsibility of TestNG. Test class should not have any instance of driver.
+   TestNG will call the public actions for assertions.
+   In POM, Page Class should not have any Test Code. It is responsibility of the TestNG.
+   TestNG should not have any driver APIs.
+11.DriverFactory is used to intiliase the driver.(Local Execution+Remote Excecution).
+12.Initialize the properties (browser, environment).
+   Seperate properties based on different Environments.
+   Framework should support multiple environment executions.
+13.Utils and Libs like getElement and getElements.
+14.JavaScript Util(higlight the element, scroll element etc)
+15.Excel utility (Apache POI API to read data from the excel sheet that provides the data) 
+   In every Test cases we dont use Excel data.
+   Data is in form of 2-Dimensional Object Array.
+16.Error class that maintian validation messages 
+17.Constants class (various constants string)
+18.Test data management in the form of the Excel Sheet.
+19.Reporting part(Extent report, Allure Report, TestNG Listener, Retry count-for failure test cases)
+   We have to use the TestNG Listeners for reporting purpose, Screen-shots, Retry logic.
+20.Logging - (Log 4j API to generate the Logs)
+21.Runner- For running of the test cases based on the environment.
+22.Maven project-LifeCylce of Maven(Build, deploy)- Maintain dependencies, plugins in POM.xml file.
+23.Page Chaining will also be present inside the framework.
+   Every Page class is connected so we have to use Page Chaining model concept.
+   Method returns the Object of next landing page class.
+24.Framework should be written in very generic form and should not have hard coded values.
+
+Infrastructure to run the test cases
+Test Cases should not be excuted in local
+We should have seperate infrastructure for its execution.
+
+1.Push the code to the gitHub.(Push, Pull, Add, Branches, PRs)
+2.Once the code is available in git we have to maintain the Jenkin server
+  It will help to trigger the test cases.(CI-CD pipeline).
+  It will have declarative pipeline syntax.
+3.Seperate instance or machine for Selenium HUB or Selenium grid(dockerized grid).
+  Jenkins will transfer test cases to HUB.
+  Selenoid grid is very popular. Customized docker grid.
+4.If individual machine is not available,We will start running test cases on AWS 
+  On EC2 instance AWS cloud we will do the testing by transfering the test cases to AWS.
+  WebHooks- will notify the NGROK proxy when code will be pushed and NGROK will notify the Jenkins server.
+5.If Remote Flag is true we have to use the concept of the Remote Web Driver to execute the Test Cases on the HUB or the AWS cloud.
+
+
+
+
+
