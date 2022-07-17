@@ -5,11 +5,6 @@ package com.qa.opencart.factory;
  */
 
 import java.io.File;
-
-/**
- * @author Nitesh Agrawal
- */
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -36,8 +31,8 @@ public class DriverFactory {
 	public static String highlight;
 	public OptionsManager optionManager;
 	public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<WebDriver>();
-	
-	public static final Logger log=Logger.getLogger(DriverFactory.class);
+
+	public static final Logger log = Logger.getLogger(DriverFactory.class);
 
 	/**
 	 * This method is used to initialize WebDriver on the basis of given browser
@@ -48,7 +43,7 @@ public class DriverFactory {
 	 */
 	public WebDriver init_driver(Properties prop) {
 		String browserName = prop.getProperty("browser").trim();
-		System.out.println("browser name is :" + browserName);
+		//System.out.println("browser name is :" + browserName);
 		log.info("brower name is :"+browserName);
 		highlight = prop.getProperty("highlight").trim();
 		optionManager = new OptionsManager(prop);
@@ -62,15 +57,18 @@ public class DriverFactory {
 
 		else if (browserName.equalsIgnoreCase(Browser.FIREFOX_BROWSER_VALUE)) {
 			WebDriverManager.firefoxdriver().setup();
+			log.info("Running Test case on the firefox browser");
 			// driver = new FirefoxDriver(optionManager.getFireFoxOptions());
 			tlDriver.set(new FirefoxDriver(optionManager.getFireFoxOptions()));
 
 		} else if (browserName.equalsIgnoreCase(Browser.SAFARI_BROWSER_VALUE)) {
+			log.info("Running Test case on the safari browser");
 			// We dont need Web Driver Manager for safari browser.
 			// driver = new SafariDriver();
 			tlDriver.set(new SafariDriver());
 		} else {
-			System.out.println("Please pass the right browser name :" + browserName);
+			log.info("Please pass the right brower name:"+browserName);
+			//System.out.println("Please pass the right browser name :" + browserName);
 		}
 
 		getDriver().manage().deleteAllCookies();
@@ -111,13 +109,15 @@ public class DriverFactory {
 		// Framework should be generic in nature.
 
 		String envName = System.getProperty("env");
-		System.out.println("Running Test on :" + envName);
+		log.info("Running Test on Environment:" + envName);
+		// System.out.println("Running Test on :" + envName);
 		// This will give me the environment name.
 
 		if (envName == null) {
 			// We will execute the test cases on QA Environment.
-			System.out.println("No Environment is given.Hence running it on QA Environment");
-			log.info("No Environment is provided by the user");
+			// System.out.println("No Environment is given.Hence running it on QA
+			// Environment");
+			log.info("No Environment is provided by the user. Hence running it on QA");
 			try {
 				ip = new FileInputStream("./src/test/resources/config/qa.config.properties");
 			} catch (FileNotFoundException e) {
@@ -142,6 +142,7 @@ public class DriverFactory {
 					ip = new FileInputStream("./src/test/resources/config/qa.config.properties");
 					break;
 				default:
+					log.info(Errors.BROWSER_NOT_FOUND);
 					System.out.println(Errors.BROWSER_NOT_FOUND);
 					break;
 				}
@@ -160,14 +161,14 @@ public class DriverFactory {
 		// . (dot) means from the current project directory
 		// We dont have to use throws declaration in the framework
 		// It is a checked Exception.(Exception checked by compiler)
-		//		try {
-		//			ip = new FileInputStream("./src/test/resources/config/config.properties");
-		//			
-		//		} catch (FileNotFoundException e) {
-		//			e.printStackTrace();
-		//		} catch (IOException e) {
-		//			e.printStackTrace();
-		//		}
+		// try {
+		// ip = new FileInputStream("./src/test/resources/config/config.properties");
+		//
+		// } catch (FileNotFoundException e) {
+		// e.printStackTrace();
+		// } catch (IOException e) {
+		// e.printStackTrace();
+		// }
 		return prop;
 	}
 
@@ -189,9 +190,6 @@ public class DriverFactory {
 	}
 }
 
-
-// We can pass multiple environment properties also from command prompt
+// We can pass multiple environment properties also from command prompt like browser name etc.
 // We have to use System.getProperty to get the values from the command prompt.
-
-
 // If we are not allowed to use WebDriverManager then we have to use System.getProperty

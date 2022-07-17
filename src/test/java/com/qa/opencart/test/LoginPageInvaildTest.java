@@ -37,13 +37,13 @@ public class LoginPageInvaildTest extends BaseTest {
 	
 	// We can pass our own message also with the Assertion also.
 	// 
-	@Test
-	public void sum() {
-		
-		int a=10;
-		int b=20;
-		int sum=a+b;
-		Assert.assertEquals(sum,40,"Sum is not correct.....");
-	}
+	//	@Test
+	//	public void sum() {
+	//		
+	//		int a=10;
+	//		int b=20;
+	//		int sum=a+b;
+	//		Assert.assertEquals(sum,40,"Sum is not correct.....");
+	//  }
 	
 }

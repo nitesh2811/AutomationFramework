@@ -34,10 +34,10 @@
 	</test>
 
 	
-	<!-- <test name="Open Cart Product Info Page Test">
+	 <test name="Open Cart Product Info Page Test">
 		<classes>
 			<class name="com.qa.opencart.test.ProductInfoPageTest" />
 		</classes>
-	</test>-->
+	</test>
 
 </suite>
