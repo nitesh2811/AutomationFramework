@@ -25,7 +25,7 @@ public class RegistrationPage {
 	private By subsNewsLetterNo = By.xpath("//label[@class='radio-inline']//input[@type='radio' and @value='0']");
 	private By subsNewsLetterYes = By.xpath("//label[@class='radio-inline']//input[@type='radio' and @value='1']");
 	private By privacyCheckbox = By.name("agree");
-	private By logOutLink=By.name("link");
+	private By logOutLink=By.name("");
 	private By submitBtn = By.cssSelector("input.btn");
 
 	private By registrationHeader = By.cssSelector("div#content h1");
