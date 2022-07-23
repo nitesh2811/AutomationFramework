@@ -9,25 +9,65 @@
 		<listener class-name="com.qa.opencart.listeners.AnnotationTransformer" /> 
 	</listeners>
 
-	<test name="Open Cart Login Page Test">
+	<test name="Open Cart Login Page Test_chrome_89">
+		<parameter name="browser" value="chrome"></parameter>
+		<parameter name="browserVersion" value="89.0"></parameter>
+		<classes>
+			<class name="com.qa.opencart.test.LoginPageTest" />
+		</classes>
+	</test>
+	
+	<test name="Open Cart Login Page Test_chrome_91">
+		<parameter name="browser" value="chrome"></parameter>
+		<parameter name="browserVersion" value="91.0"></parameter>
 		<classes>
 			<class name="com.qa.opencart.test.LoginPageTest" />
 		</classes>
 	</test>
 
-	<test name="Open Cart Accounts Page Test">
+	<test name="Open Cart Login Page Test_chrome_100">
+		<parameter name="browser" value="chrome"></parameter>
+		<parameter name="browserVersion" value="100.0"></parameter>
+		<classes>
+			<class name="com.qa.opencart.test.LoginPageTest" />
+		</classes>
+	</test>
+
+<!-- 	<test name="Open Cart Login Page Test_firefox_57">
+		<parameter name="browser" value="firefox"></parameter>
+		<parameter name="browserVersion" value="57.0"></parameter>
+		<classes>
+			<class name="com.qa.opencart.test.LoginPageTest" />
+		</classes>
+	</test>
+
+	<test name="Open Cart Login Page Test_firefox_83">
+		<parameter name="browser" value="firefox"></parameter>
+		<parameter name="browserVersion" value="83.0"></parameter>
+		<classes>
+			<class name="com.qa.opencart.test.LoginPageTest" />
+		</classes>
+	</test>-->
+
+
+	<!-- <test name="Open Cart Accounts Page Test">
+	<parameter name="browser" value="firefox"></parameter>
 		<classes>
 			<class name="com.qa.opencart.test.AccountsPageTest" />
 		</classes>
 	</test>
 
 	<test name="Open Cart Registration Page Test">
+	<parameter name="browser" value="firefox"></parameter>		
+
 		<classes>
+	
 			<class name="com.qa.opencart.test.RegistrationPageTest" />
 		</classes>
 	</test>
 
 	<test name="Open Cart Login Page Negative Test">
+	<parameter name="browser" value="chrome"></parameter>
 		<classes>
 			<class name="com.qa.opencart.test.LoginPageInvaildTest" />
 		</classes>
@@ -38,6 +78,6 @@
 		<classes>
 			<class name="com.qa.opencart.test.ProductInfoPageTest" />
 		</classes>
-	</test>
+	</test>-->
 
 </suite>

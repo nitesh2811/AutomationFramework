@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
@@ -17,6 +19,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
 import com.qa.opencart.utils.Browser;
@@ -43,32 +46,43 @@ public class DriverFactory {
 	 */
 	public WebDriver init_driver(Properties prop) {
 		String browserName = prop.getProperty("browser").trim();
-		//System.out.println("browser name is :" + browserName);
-		log.info("brower name is :"+browserName);
+		// System.out.println("browser name is :" + browserName);
+		log.info("brower name is :" + browserName);
 		highlight = prop.getProperty("highlight").trim();
 		optionManager = new OptionsManager(prop);
 
 		if (browserName.equalsIgnoreCase(Browser.CHROME_BROWSER_VALUE)) {
-			WebDriverManager.chromedriver().setup();
 			log.info("Running Test Case on chrome browser");
-			// driver = new ChromeDriver(optionManager.getChromeOptions());
-			tlDriver.set(new ChromeDriver(optionManager.getChromeOptions()));
+
+			if (Boolean.parseBoolean(prop.getProperty("remote"))) {
+				init_remoteWebDriver(Browser.CHROME_BROWSER_VALUE);
+			} else {
+
+				WebDriverManager.chromedriver().setup();
+
+				// driver = new ChromeDriver(optionManager.getChromeOptions());
+				tlDriver.set(new ChromeDriver(optionManager.getChromeOptions()));
+			}
 		}
 
 		else if (browserName.equalsIgnoreCase(Browser.FIREFOX_BROWSER_VALUE)) {
-			WebDriverManager.firefoxdriver().setup();
 			log.info("Running Test case on the firefox browser");
-			// driver = new FirefoxDriver(optionManager.getFireFoxOptions());
-			tlDriver.set(new FirefoxDriver(optionManager.getFireFoxOptions()));
+			if (Boolean.parseBoolean(prop.getProperty("remote"))) {
+				init_remoteWebDriver(Browser.FIREFOX_BROWSER_VALUE);
+			} else {
 
+				WebDriverManager.firefoxdriver().setup();
+				// driver = new FirefoxDriver(optionManager.getFireFoxOptions());
+				tlDriver.set(new FirefoxDriver(optionManager.getFireFoxOptions()));
+			}
 		} else if (browserName.equalsIgnoreCase(Browser.SAFARI_BROWSER_VALUE)) {
 			log.info("Running Test case on the safari browser");
 			// We dont need Web Driver Manager for safari browser.
 			// driver = new SafariDriver();
 			tlDriver.set(new SafariDriver());
 		} else {
-			log.info("Please pass the right brower name:"+browserName);
-			//System.out.println("Please pass the right browser name :" + browserName);
+			log.info("Please pass the right brower name:" + browserName);
+			// System.out.println("Please pass the right browser name :" + browserName);
 		}
 
 		getDriver().manage().deleteAllCookies();
@@ -188,6 +202,34 @@ public class DriverFactory {
 		}
 		return path;
 	}
+
+	public void init_remoteWebDriver(String browserName) {
+
+		log.info("Running test cases on remote grid server :" + browserName);
+
+		if (browserName.equalsIgnoreCase("chrome")) {
+			try {
+				tlDriver.set(
+						new RemoteWebDriver(new URL(prop.getProperty("huburl")), optionManager.getChromeOptions()));
+			} catch (MalformedURLException e) {
+
+				e.printStackTrace();
+			}
+
+		}
+
+		else if (browserName.equalsIgnoreCase("firefox")) {
+			try {
+				tlDriver.set(
+						new RemoteWebDriver(new URL(prop.getProperty("huburl")), optionManager.getFireFoxOptions()));
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
+
+		}
+
+	}
+
 }
 
 // We can pass multiple environment properties also from command prompt like browser name etc.

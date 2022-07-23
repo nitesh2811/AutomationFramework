@@ -27,7 +27,11 @@ public class OptionsManager {
 		if (Boolean.parseBoolean(prop.getProperty("incognito"))) {
 			co.addArguments("--incognito");
 		}
-
+		if (Boolean.parseBoolean(prop.getProperty("remote"))) {
+			co.setPlatformName("linux");
+			co.setCapability("enableVNC",true);
+			co.setBrowserVersion(prop.getProperty("browserVersion"));
+		}
 		return co;
 	}
 
@@ -40,7 +44,11 @@ public class OptionsManager {
 		if (Boolean.parseBoolean(prop.getProperty("incognito"))) {
 			fo.addArguments("--incognito");
 		}
-
+		if (Boolean.parseBoolean(prop.getProperty("remote"))) {
+			fo.setPlatformName("linux");
+			fo.setCapability("enableVNC",true);
+			fo.setBrowserVersion(prop.getProperty("browserVersion"));
+		}
 		return fo;
 	}
 }
