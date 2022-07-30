@@ -18,7 +18,7 @@ pipeline
         stage('Regression Automation Test') {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    git 'https://github.com/naveenanimation20/Jan2022Framework.git'
+                    git 'https://github.com/nitesh2811/AutomationFramework.git'
                     sh "mvn clean install"
                     
                 }
