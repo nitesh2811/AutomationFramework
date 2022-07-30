@@ -22,6 +22,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
+import com.qa.opencart.exceptions.DriverException;
 import com.qa.opencart.utils.Browser;
 import com.qa.opencart.utils.Errors;
 
@@ -83,6 +84,8 @@ public class DriverFactory {
 		} else {
 			log.info("Please pass the right brower name:" + browserName);
 			// System.out.println("Please pass the right browser name :" + browserName);
+			throw new DriverException("Browser is not correct");
+		
 		}
 
 		getDriver().manage().deleteAllCookies();
