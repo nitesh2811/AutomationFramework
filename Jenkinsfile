@@ -19,7 +19,7 @@ pipeline
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     git 'https://github.com/nitesh2811/AutomationFramework.git'
-                    sh "mvn clean install"
+                    bat "mvn clean install"
                     
                 }
             }
