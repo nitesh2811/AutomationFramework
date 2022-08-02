@@ -10,12 +10,12 @@ Hybrid Framework
 5.According to the POM(Design Pattern)-Every page should have a page layer irrespective of the number of pages.
   POM is only applicable for the WebPages or the Mobile Pages.
   It is not applicable for the API automation.
-6.Every page class has to follow the Encapsulation-(Every page will have By locators)
+6.Every page class has to follow the Encapsulation-(Every page will have private By locators)
 7.There will be public page actions and private By locators-(Locators will be private)
 8.Every page class must have test class. 
   Every test class will have assertions 
 9.Test class will extends Base Test.
-  Remember page class will not have any Test code otherwise it will violation of the POM.
+  Remember page class will not have any Test code otherwise it will be violation of the POM.
 10.Test code is responsibility of TestNG. Test class should not have any instance of driver.
    TestNG will call the public actions for assertions.
    In POM, Page Class should not have any Test Code. It is responsibility of the TestNG.
@@ -47,7 +47,7 @@ Test Cases should not be excuted in local
 We should have seperate infrastructure for its execution.
 
 1.Push the code to the gitHub.(Push, Pull, Add, Branches, PRs)
-2.Once the code is available in git we have to maintain the Jenkin server
+2.Once the code is available in git we have to maintain the Jenkins server
   It will help to trigger the test cases.(CI-CD pipeline).
   It will have declarative pipeline syntax.
 3.Seperate instance or machine for Selenium HUB or Selenium grid(dockerized grid).
